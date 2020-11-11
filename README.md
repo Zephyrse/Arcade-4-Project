@@ -4,7 +4,7 @@ Repository for the Arcade 4 Project group
 - Movement (Finished/Improving)
 - Smooth Camera Follow (Finished/Improving)
 - Shooting (Halfway Finished)
-# Planned Features
+# Planned Features / Will add more soon
 - Enemies
 - Highscore
 - Endless Running
