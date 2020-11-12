@@ -23,14 +23,18 @@ public class Bullet : MonoBehaviour
         Destroy(gameObject);
     }
 
-    // Check if bullet instance collided with 'obstacles', then destroy instance
-    void OnCollisionEnter2D(Collision2D col)
-    {
-        if (col.gameObject.tag.Equals("Obstacle") == true)
-        {
-            Destroy(gameObject);
-        }
-    }
     #endregion
+
+    void OnTriggerEnter2D(Collider2D col)
+    {
+        EnemyController enemy = col.GetComponent<EnemyController>();
+        Debug.Log(col.name);
+
+        if (enemy != null)
+        {
+            enemy.TakeDamage(20);
+        }
+        Destroy(gameObject);
+    }
 }
 

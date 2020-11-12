@@ -5,9 +5,9 @@ using UnityEngine;
 [RequireComponent(typeof(Rigidbody2D), typeof(BoxCollider2D))]
 public class PlayerController : MonoBehaviour
 {
-    // Variables
     [Header("Variables")]
     public float    moveSpeed = 3f;
+    public float    jumpForce;
     public Vector3  movement;
 
     void Update()
@@ -24,8 +24,8 @@ public class PlayerController : MonoBehaviour
     {
         if (Input.GetButtonDown("Jump"))
         {
-            gameObject.GetComponent<Rigidbody2D>().AddForce(new Vector2(0f, 5f), ForceMode2D.Impulse);
+            // Adding force on the Y axis if the jump button is pressed
+            gameObject.GetComponent<Rigidbody2D>().AddForce(new Vector2(0f, jumpForce), ForceMode2D.Impulse);
         }
     }
-
 }
