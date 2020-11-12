@@ -9,12 +9,6 @@ public class PlayerController : MonoBehaviour
     public float    moveSpeed = 3f;
     public Vector3  movement;
 
-    // Start is called before the first frame update
-    void Start()
-    {
-    }
-
-    // Update is called once per frame
     void Update()
     {
         Jump();
