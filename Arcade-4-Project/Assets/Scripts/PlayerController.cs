@@ -6,6 +6,7 @@ using UnityEngine;
 public class PlayerController : MonoBehaviour
 {
     // Variables
+    [Header("Variables")]
     public float    moveSpeed = 3f;
     public Vector3  movement;
 
