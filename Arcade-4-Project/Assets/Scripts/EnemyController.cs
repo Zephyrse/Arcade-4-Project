@@ -10,7 +10,7 @@ public class EnemyController : MonoBehaviour
 
     [Header("Variables")]
     public int e_health = 100;
-    public int  e_health_threshold = 20;
+    public int  e_health_threshold = 0;
 
     // Setting enemies max healthbar value to its health as soon as the script starts
     void Start()
