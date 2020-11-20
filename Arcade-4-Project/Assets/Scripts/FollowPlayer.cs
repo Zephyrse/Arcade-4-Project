@@ -6,15 +6,17 @@ public class FollowPlayer : MonoBehaviour
 {
     public Transform playerTarget;
     public Vector3 cameraOffset;
+    public Rigidbody2D playerRb;
 
     // Can only set the Smooth factor between a certain range
-    [Range(1,10)] 
+    [Range(1,30)] 
     public float smoothFactor;
 
     private void FixedUpdate()
     {
         // Call the function every fixed frame-rate frame
         SmoothFollow();
+        CheckPlayerVelocity();
     }
 
     void SmoothFollow()
@@ -28,5 +30,16 @@ public class FollowPlayer : MonoBehaviour
         transform.position = smoothedPosition;
     }
 
+    void CheckPlayerVelocity()
+    {
+        if (playerRb.velocity.y < -10)
+        {
+            smoothFactor += 20 * Time.deltaTime;
+        }
+        else
+        {
+            smoothFactor = 15;
+        }
+    }
 
 }
