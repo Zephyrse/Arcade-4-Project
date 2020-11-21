@@ -131,7 +131,7 @@ GameObject:
   m_Component:
   - component: {fileID: 219126372}
   - component: {fileID: 219126371}
-  m_Layer: 0
+  m_Layer: 8
   m_Name: LoopingPlatform
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -453,7 +453,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   playerTarget: {fileID: 985793204}
   cameraOffset: {x: 0, y: 4.6, z: -12.68}
-  smoothFactor: 8
+  playerRb: {fileID: 985793202}
+  smoothFactor: 30
 --- !u!20 &519420031
 Camera:
   m_ObjectHideFlags: 0
@@ -1522,7 +1523,14 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   moveSpeed: 5
   jumpForce: 15
+  checkRadius: 2
   movement: {x: 0, y: 0, z: 0}
+  groundCheck: {fileID: 415445262}
+  checkGroundLayer:
+    serializedVersion: 2
+    m_Bits: 256
+  extraJumps: 0
+  extraJumpsValue: 1
 --- !u!61 &985793201
 BoxCollider2D:
   m_ObjectHideFlags: 0
@@ -1665,7 +1673,7 @@ GameObject:
   m_Component:
   - component: {fileID: 1021865943}
   - component: {fileID: 1021865944}
-  m_Layer: 0
+  m_Layer: 8
   m_Name: PlatformSection2ToLoop
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -1780,7 +1788,7 @@ GameObject:
   m_Component:
   - component: {fileID: 1237205782}
   - component: {fileID: 1237205783}
-  m_Layer: 0
+  m_Layer: 8
   m_Name: Platform
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -2184,7 +2192,7 @@ GameObject:
   m_Component:
   - component: {fileID: 1344958164}
   - component: {fileID: 1344958165}
-  m_Layer: 0
+  m_Layer: 8
   m_Name: PlatformSection2ToLoop
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -2951,7 +2959,7 @@ GameObject:
   m_Component:
   - component: {fileID: 1698361529}
   - component: {fileID: 1698361528}
-  m_Layer: 0
+  m_Layer: 8
   m_Name: LoopingPlatform (1)
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -3157,7 +3165,7 @@ GameObject:
   m_Component:
   - component: {fileID: 1797875462}
   - component: {fileID: 1797875463}
-  m_Layer: 0
+  m_Layer: 8
   m_Name: PlatformSection2ToLoop
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -3349,7 +3357,7 @@ GameObject:
   m_Component:
   - component: {fileID: 1969264954}
   - component: {fileID: 1969264953}
-  m_Layer: 0
+  m_Layer: 8
   m_Name: LoopingPlatform (2)
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -3408,7 +3416,7 @@ GameObject:
   m_Component:
   - component: {fileID: 2015247391}
   - component: {fileID: 2015247392}
-  m_Layer: 0
+  m_Layer: 8
   m_Name: Platform
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -3563,7 +3571,7 @@ GameObject:
   m_Component:
   - component: {fileID: 2054072561}
   - component: {fileID: 2054072562}
-  m_Layer: 0
+  m_Layer: 8
   m_Name: Platform
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -3742,7 +3750,7 @@ GameObject:
   m_Component:
   - component: {fileID: 2064131457}
   - component: {fileID: 2064131456}
-  m_Layer: 0
+  m_Layer: 8
   m_Name: LoopingPlatform (3)
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -3800,7 +3808,7 @@ GameObject:
   m_Component:
   - component: {fileID: 2112629653}
   - component: {fileID: 2112629654}
-  m_Layer: 0
+  m_Layer: 8
   m_Name: Platform
   m_TagString: Untagged
   m_Icon: {fileID: 0}
