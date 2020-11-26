@@ -1,4 +1,5 @@
-﻿using System.Collections;
+﻿using System;
+using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
@@ -13,12 +14,14 @@ public class PlayerController : MonoBehaviour
     public Vector3  movement;
     public Transform groundCheck;
     public LayerMask checkGroundLayer;
-
+    public bool facingRight;
     [SerializeField] private int extraJumps;
     [SerializeField] private int extraJumpsValue = 2;
+    private Vector3 playerScale;
 
     void Start()
     {
+        facingRight = true;
         extraJumps = extraJumpsValue;
     }
 
@@ -30,6 +33,7 @@ public class PlayerController : MonoBehaviour
         // Adding the results of movement, deltatime and moveSpeed to the Players Position values
         // This code is independant of framerates due to Time.deltaTime
         transform.position += movement * Time.deltaTime * moveSpeed;
+        Flip(movement);
     }
 
     void Update()
@@ -51,4 +55,19 @@ public class PlayerController : MonoBehaviour
             extraJumps--;
         }
     }
+
+    private void Flip(Vector3 movement)
+    {
+        if(movement.x > 0f && !facingRight || movement.x < 0 && facingRight)
+        {
+            facingRight = !facingRight;
+
+            Vector3 playerScale = transform.localScale;
+            playerScale = transform.localScale;
+
+            playerScale.x *= -1;
+            transform.localScale = playerScale;
+        }
+    }
+
 }
