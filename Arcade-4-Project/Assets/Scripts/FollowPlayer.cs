@@ -30,6 +30,7 @@ public class FollowPlayer : MonoBehaviour
         transform.position = smoothedPosition;
     }
 
+    // This function is so that the player doesn't move out of the Camera's view
     void CheckPlayerVelocity()
     {
         if (playerRb.velocity.y < -10)
@@ -41,5 +42,4 @@ public class FollowPlayer : MonoBehaviour
             smoothFactor = 15;
         }
     }
-
 }

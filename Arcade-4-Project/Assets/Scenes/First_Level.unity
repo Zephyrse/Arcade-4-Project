@@ -1508,6 +1508,7 @@ MonoBehaviour:
   firePoint: {fileID: 1925368951}
   bulletPrefab: {fileID: 3495273544993388959, guid: db30db44db23a104a805eec4c0a2bf54,
     type: 3}
+  playerT: {fileID: 985793204}
   bulletSpeed: 40
 --- !u!114 &985793200
 MonoBehaviour:
@@ -1529,6 +1530,7 @@ MonoBehaviour:
   checkGroundLayer:
     serializedVersion: 2
     m_Bits: 256
+  facingRight: 0
   extraJumps: 0
   extraJumpsValue: 1
 --- !u!61 &985793201
@@ -3340,8 +3342,8 @@ Transform:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1925368950}
-  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: 1.89, y: 0.73, z: 0}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 3.27, y: 0.73, z: 0}
   m_LocalScale: {x: 2, y: 2, z: 2}
   m_Children: []
   m_Father: {fileID: 985793204}

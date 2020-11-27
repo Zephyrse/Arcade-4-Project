@@ -7,10 +7,8 @@ public class Weapon : MonoBehaviour
     [Header("References")]
     public Transform firePoint;
     public GameObject bulletPrefab;
+    [SerializeField]
     public Transform playerT;
-
-    [Header("Bullet Settings")]
-    public float bulletSpeed = 40.0f;
 
     void Update()
     {
@@ -23,17 +21,16 @@ public class Weapon : MonoBehaviour
    
     void Shoot()
     {
-        if(playerT.localScale.x < 0)
+        if (playerT.localScale.x < 0)
         {
-            bulletSpeed = -40.0f;
+            bulletPrefab.GetComponent<Bullet>().nBulletSpeed = -40.0f;
         }
         else
         {
-            bulletSpeed = 40.0f;
+            bulletPrefab.GetComponent<Bullet>().nBulletSpeed = 40.0f;
         }
-
         // Spawns an instance of the Bullet Prefab and grabs a reference to its Rigidbody for later use
         Rigidbody2D bulletRb = Instantiate(bulletPrefab, firePoint.position, firePoint.rotation).GetComponent<Rigidbody2D>();
-        bulletRb.AddRelativeForce(new Vector2(bulletSpeed, 0.0f), ForceMode2D.Impulse);
+        //bulletRb.AddRelativeForce(new Vector2(bulletSpeed, 0.0f), ForceMode2D.Impulse);
     }
 }
