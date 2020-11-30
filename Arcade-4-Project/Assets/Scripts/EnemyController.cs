@@ -7,15 +7,36 @@ public class EnemyController : MonoBehaviour
 {
     [Header("References")]
     public HealthBar healthBar;
+    public Transform firePoint;
+    [SerializeField]
+    private GameObject bullet;
 
     [Header("Variables")]
     public int e_health = 100;
     public int  e_health_threshold = 0;
+    public float fireRate;
+    public float nextFire;
 
     // Setting enemies max healthbar value to its health as soon as the script starts
     void Start()
     {
+        fireRate = 2f;
+        nextFire = Time.time;
         healthBar.SetMaxHealth(e_health);
+    }
+
+    void Update()
+    {
+        CheckTimeToFire();
+    }
+
+    void CheckTimeToFire()
+    {
+        if (Time.time > nextFire)
+        {
+            Instantiate(bullet, firePoint.position, Quaternion.identity);
+            nextFire = Time.time + fireRate;
+        }
     }
 
     // Enemy takes damage | Updates its health and healthbar value
@@ -35,5 +56,10 @@ public class EnemyController : MonoBehaviour
     {
         Destroy(gameObject);
     }
+
+
+
+
+
 
 }
