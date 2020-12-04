@@ -10,20 +10,19 @@ public class EnemyBullet : MonoBehaviour
     PlayerController target;
     Vector2 moveDirection;
 
-
-
     // Start is called before the first frame update
     void Start()
     {
         target = GameObject.FindObjectOfType<PlayerController>();
         moveDirection = (target.transform.position - transform.position).normalized * nBulletSpeed;
         rb.velocity = new Vector2(moveDirection.x, moveDirection.y);
-        Destroy(gameObject, 1f);
+        Debug.DrawRay(transform.position, moveDirection, Color.green, 1);
+        Destroy(gameObject, (float)0.5);
     }
-
-    // Update is called once per frame
-    void Update()
+    
+    // Destroy bullet objects once they become off-screen
+    void OnBecameInvisible()
     {
-        
+        Destroy(gameObject);
     }
 }

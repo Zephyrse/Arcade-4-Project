@@ -16,7 +16,7 @@ public class ParallaxScroll : MonoBehaviour
     }
 
     // Update is called once per frame
-    void FixedUpdate()
+    void Update()
     {
         float temp = (cameraObject.transform.position.x * (1 - parallaxEffect));
         float dist = (cameraObject.transform.position.x * parallaxEffect);
