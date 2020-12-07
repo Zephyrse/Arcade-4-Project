@@ -8,6 +8,7 @@ public class Weapon : MonoBehaviour
     public Transform firePoint;
     public GameObject bulletPrefab;
     public Transform playerT;
+    
     public float fireRate;
     public float nextFire;
 

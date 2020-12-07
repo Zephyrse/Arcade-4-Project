@@ -14,9 +14,12 @@ public class FollowPlayer : MonoBehaviour
 
     private void FixedUpdate()
     {
-        // Call the function every fixed frame-rate frame
-        SmoothFollow();
-        CheckPlayerVelocity();
+        if (playerRb != null)
+        {
+            // Call the function every fixed frame-rate frame
+            SmoothFollow();
+            CheckPlayerVelocity();
+        }
     }
 
     void SmoothFollow()

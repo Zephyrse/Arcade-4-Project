@@ -8,6 +8,7 @@ public class EnemyController : MonoBehaviour
     [Header("References")]
     public HealthBar healthBar;
     public Transform firePoint;
+    public GameObject player;
     [SerializeField]
     private GameObject bullet;
 
@@ -27,7 +28,10 @@ public class EnemyController : MonoBehaviour
 
     void Update()
     {
-        CheckTimeToFire();
+        if (player != null)
+        {
+            CheckTimeToFire();
+        }
     }
 
     void CheckTimeToFire()
