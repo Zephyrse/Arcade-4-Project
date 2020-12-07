@@ -38,7 +38,7 @@ TagManager:
   - 
   - 
   - 
-  - 
+  - GameOver
   m_SortingLayers:
   - name: Background
     uniqueID: 3297773495

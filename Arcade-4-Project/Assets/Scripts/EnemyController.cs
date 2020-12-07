@@ -17,6 +17,7 @@ public class EnemyController : MonoBehaviour
     public int  e_health_threshold = 0;
     public float fireRate;
     public float nextFire;
+    public float enemyRange;
 
     // Setting enemies max healthbar value to its health as soon as the script starts
     void Start()
@@ -24,6 +25,7 @@ public class EnemyController : MonoBehaviour
         fireRate = 2f;
         nextFire = Time.time;
         healthBar.SetMaxHealth(e_health);
+        //StartCoroutine(CheckDistance());
     }
 
     void Update()
@@ -36,7 +38,7 @@ public class EnemyController : MonoBehaviour
 
     void CheckTimeToFire()
     {
-        if (Time.time > nextFire)
+        if (Time.time > nextFire && Vector2.Distance(transform.position, player.transform.position) <= enemyRange)
         {
             Instantiate(bullet, firePoint.position, Quaternion.identity);
             nextFire = Time.time + fireRate;
@@ -51,16 +53,19 @@ public class EnemyController : MonoBehaviour
 
         if (e_health <= e_health_threshold)
         {
-            EnemyDeath();
+            Destroy(gameObject);
         }
     }
 
-    // On death, destroys the object this script is attached to
-    void EnemyDeath()
-    {
-        Destroy(gameObject);
-    }
-
+    //// Debug Function, checking the position between enemy and player
+    //public IEnumerator CheckDistance()
+    //{
+    //    while (true)
+    //    {
+    //        Debug.Log(Vector2.Distance(transform.position, player.transform.position));
+    //        yield return new WaitForSeconds(1.0f);
+    //    }
+    //}
 
 
 

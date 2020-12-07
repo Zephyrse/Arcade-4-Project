@@ -31,6 +31,7 @@ public class PlayerController : MonoBehaviour
 
     void FixedUpdate()
     {
+        // Checks for player
         isGrounded = Physics2D.OverlapCircle(groundCheck.position, checkRadius, checkGroundLayer);
         isGameOver = Physics2D.OverlapCircle(groundCheck.position, checkRadius, checkGameOverMask);
         // Movement equals the Horizontal movement of the player (Check input manager for button inputs)
@@ -84,6 +85,5 @@ public class PlayerController : MonoBehaviour
             transform.localScale = playerScale;
         }
     }
-
 
 }
