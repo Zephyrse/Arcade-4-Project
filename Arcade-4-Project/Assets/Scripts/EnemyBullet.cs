@@ -20,6 +20,20 @@ public class EnemyBullet : MonoBehaviour
         Destroy(gameObject, (float)0.5);
     }
     
+    void OnTriggerEnter2D(Collider2D col)
+    {
+        // Assigning gameObjects with the EnemyController script the 'col' variable so only they can trigger this function
+        PlayerController player = col.GetComponent<PlayerController>();
+        Debug.Log(col.name);
+
+        // Checking if enemy exists, then enemy takes damage.
+        if (player != null)
+        {
+            player.TakeDamage(20);
+        }
+        Destroy(gameObject);
+    }
+
     // Destroy bullet objects once they become off-screen
     void OnBecameInvisible()
     {
