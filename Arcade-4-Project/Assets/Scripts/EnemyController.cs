@@ -1,5 +1,6 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
+using TMPro;
 using UnityEngine;
 
 [RequireComponent(typeof(Rigidbody2D), typeof(BoxCollider2D))]
@@ -8,9 +9,14 @@ public class EnemyController : MonoBehaviour
     [Header("References")]
     public HealthBar healthBar;
     public Transform firePoint;
-    public GameObject player;
+    public Transform target = null;
+
+
     [SerializeField]
     private GameObject bullet;
+
+    [SerializeField]
+    private TextMeshProUGUI enemyShootText;
 
     [Header("Variables")]
     public int e_health = 100;
@@ -18,6 +24,7 @@ public class EnemyController : MonoBehaviour
     public float fireRate;
     public float nextFire;
     public float enemyRange;
+    public float nextFireTest;
 
     // Setting enemies max healthbar value to its health as soon as the script starts
     void Start()
@@ -25,23 +32,28 @@ public class EnemyController : MonoBehaviour
         fireRate = 2f;
         nextFire = Time.time;
         healthBar.SetMaxHealth(e_health);
-        //StartCoroutine(CheckDistance());
+        StartCoroutine(CheckDistanceAndFlip());
     }
 
     void Update()
     {
-        if (player != null)
+        if (target != null)
         {
             CheckTimeToFire();
         }
+
+        enemyShootText.text = ("Enemy Firing: " + nextFireTest.ToString());
+        nextFireTest += Time.deltaTime;
+
     }
 
     void CheckTimeToFire()
     {
-        if (Time.time > nextFire && Vector2.Distance(transform.position, player.transform.position) <= enemyRange)
+        if (nextFireTest >= fireRate && Vector2.Distance(transform.position, target.position) <= enemyRange)
         {
             Instantiate(bullet, firePoint.position, Quaternion.identity);
-            nextFire = Time.time + fireRate;
+            nextFireTest = 0f;
+
         }
     }
 
@@ -57,18 +69,33 @@ public class EnemyController : MonoBehaviour
         }
     }
 
-    //// Debug Function, checking the position between enemy and player
-    //public IEnumerator CheckDistance()
-    //{
-    //    while (true)
-    //    {
-    //        Debug.Log(Vector2.Distance(transform.position, player.transform.position));
-    //        yield return new WaitForSeconds(1.0f);
-    //    }
-    //}
+    public IEnumerator CheckDistanceAndFlip()
+    {
+        while (true)
+        {
+            //Debug.Log(Vector2.Distance(transform.position, player.transform.position));
+            //yield return new WaitForSeconds(1.0f);
 
+            Vector2 toTarget = (target.position - transform.position).normalized;
 
+            if (Vector2.Dot(toTarget, transform.right) < 0)
+            {
+                if (transform.localScale.x == -0.1f)
+                {
+                    transform.localScale = new Vector2(0.1f, 0.1f);
+                };
 
+            }
+            else
+            {
+                if (transform.localScale.x == 0.1f)
+                {
+                    transform.localScale = new Vector2(-0.1f, 0.1f);
+                };
+            }
 
+            yield return new WaitForSeconds(1.0f);
+        }
+    }
 
 }
