@@ -8,7 +8,7 @@ public class PlayerController : MonoBehaviour
 {
     [Header("References")]
     public Animator animator;
-    public HealthBar healthBar;
+    public PlayerHealthBar healthBar;
 
     [Header("Variables")]
     public float    moveSpeed = 3f;
@@ -21,6 +21,7 @@ public class PlayerController : MonoBehaviour
     public LayerMask checkGameOverMask;
     public bool facingRight;
     public int p_health = 100;
+    public int p_health_max = 100;
     public int p_health_threshold = 0;
 
     [SerializeField] private int extraJumps;
@@ -87,6 +88,17 @@ public class PlayerController : MonoBehaviour
         if (p_health <= p_health_threshold)
         {
             Destroy(gameObject);
+        }
+    }
+
+    public void HealDamage(int damage)
+    {
+        p_health += damage;
+        healthBar.SetHealth(p_health);
+
+        if (p_health > p_health_max)
+        {
+            p_health = p_health_max;
         }
     }
 

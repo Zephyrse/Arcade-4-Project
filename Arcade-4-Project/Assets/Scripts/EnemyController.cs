@@ -7,16 +7,14 @@ using UnityEngine;
 public class EnemyController : MonoBehaviour
 {
     [Header("References")]
-    public HealthBar healthBar;
+    public EnemyHealthBar healthBar;
+    public EnemyHealthBar shootBar;
     public Transform firePoint;
     public Transform target = null;
 
 
     [SerializeField]
-    private GameObject bullet;
-
-    [SerializeField]
-    private TextMeshProUGUI enemyShootText;
+    private GameObject bullet = null;
 
     [Header("Variables")]
     public int e_health = 100;
@@ -32,6 +30,7 @@ public class EnemyController : MonoBehaviour
         fireRate = 2f;
         nextFire = Time.time;
         healthBar.SetMaxHealth(e_health);
+        shootBar.SetMaxHealth((int)fireRate);
         StartCoroutine(CheckDistanceAndFlip());
     }
 
@@ -42,8 +41,8 @@ public class EnemyController : MonoBehaviour
             CheckTimeToFire();
         }
 
-        enemyShootText.text = ("Enemy Firing: " + nextFireTest.ToString());
         nextFireTest += Time.deltaTime;
+        shootBar.SetHealthFloat(nextFireTest);
 
     }
 
@@ -51,9 +50,10 @@ public class EnemyController : MonoBehaviour
     {
         if (nextFireTest >= fireRate && Vector2.Distance(transform.position, target.position) <= enemyRange)
         {
-            Instantiate(bullet, firePoint.position, Quaternion.identity);
-            nextFireTest = 0f;
-
+            if (gameObject.tag != "Segway") {
+                Instantiate(bullet, firePoint.position, Quaternion.identity);
+                nextFireTest = 0f;
+            }
         }
     }
 
@@ -71,7 +71,7 @@ public class EnemyController : MonoBehaviour
 
     public IEnumerator CheckDistanceAndFlip()
     {
-        while (true)
+        while (true && target != null)
         {
             //Debug.Log(Vector2.Distance(transform.position, player.transform.position));
             //yield return new WaitForSeconds(1.0f);

@@ -16,13 +16,13 @@ public class EnemyBullet : MonoBehaviour
         target = GameObject.FindObjectOfType<PlayerController>();
         moveDirection = (target.transform.position - transform.position).normalized * nBulletSpeed;
         rb.velocity = new Vector2(moveDirection.x, moveDirection.y);
-        Debug.DrawRay(transform.position, moveDirection, Color.green, 1);
+        //Debug.DrawRay(transform.position, moveDirection, Color.green, 1);
         Destroy(gameObject, (float)0.5);
     }
     
     void OnTriggerEnter2D(Collider2D col)
     {
-        // Assigning gameObjects with the EnemyController script the 'col' variable so only they can trigger this function
+        // Assigning gameObjects with the PlayerController script the 'col' variable so only they can trigger this function
         PlayerController player = col.GetComponent<PlayerController>();
         Debug.Log(col.name);
 
