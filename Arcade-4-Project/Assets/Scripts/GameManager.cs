@@ -25,7 +25,10 @@ public class GameManager : MonoBehaviour
     public void LoadGame()
     {
         loadingScreen.gameObject.SetActive(true);
-        for(int i = 0; i < m_Menus.Count; i++) { m_Menus[i].SetActive(false); };
+        foreach (var t in m_Menus)
+        {
+            t.SetActive(false);
+        };
 
         m_Scenes.Add(SceneManager.UnloadSceneAsync((int)SceneIndex.TITLE_SCREEN));
         m_Scenes.Add(SceneManager.LoadSceneAsync((int)SceneIndex.FIRST_LEVEL, LoadSceneMode.Additive));
@@ -34,11 +37,11 @@ public class GameManager : MonoBehaviour
         StartCoroutine(SceneLoadingProgress());
     }
 
-    public IEnumerator SceneLoadingProgress()
+    private IEnumerator SceneLoadingProgress()
     {
-        for(int i = 0; i < m_Scenes.Count; i++)
+        foreach (var t in m_Scenes)
         {
-            while (!m_Scenes[i].isDone)
+            while (!t.isDone)
             {
                 yield return null;
             }

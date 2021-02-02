@@ -26,9 +26,9 @@ public class PlayerController : MonoBehaviour
 
     [SerializeField] private int extraJumps;
     [SerializeField] private int extraJumpsValue = 2;
-    private Vector3 playerScale;
-    private bool isGrounded;
-    private bool isGameOver;
+    private Vector3 _playerScale;
+    private bool _isGrounded;
+    private bool _isGameOver;
 
     void Start()
     {
@@ -40,8 +40,8 @@ public class PlayerController : MonoBehaviour
     void FixedUpdate()
     {
         // Checks for player
-        isGrounded = Physics2D.OverlapCircle(groundCheck.position, checkRadius, checkGroundLayer);
-        isGameOver = Physics2D.OverlapCircle(groundCheck.position, checkRadius, checkGameOverMask);
+        _isGrounded = Physics2D.OverlapCircle(groundCheck.position, checkRadius, checkGroundLayer);
+        _isGameOver = Physics2D.OverlapCircle(groundCheck.position, checkRadius, checkGameOverMask);
         // Movement equals the Horizontal movement of the player (Check input manager for button inputs)
         movement = new Vector3(Input.GetAxis("Horizontal"), 0f, 0f);
         horizontalMoving = Input.GetAxisRaw("Horizontal") * moveSpeed;
@@ -55,13 +55,13 @@ public class PlayerController : MonoBehaviour
     {
         animator.SetFloat("Speed", Mathf.Abs(horizontalMoving));
 
-        if (isGrounded == true)
+        if (_isGrounded == true)
         {
             animator.SetBool("isJumping", false);
             extraJumps = extraJumpsValue;
         }
 
-        if (isGameOver == true)
+        if (_isGameOver == true)
         {
             Destroy(gameObject);
         }

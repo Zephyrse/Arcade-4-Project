@@ -4,31 +4,33 @@ using UnityEngine;
 
 public class ParallaxScroll : MonoBehaviour
 {
-    private float length, startpos;
+    private float _length, _startpos;
     public GameObject cameraObject;
     public float parallaxEffect;
+    
 
     // Start is called before the first frame update
-    void Start()
+    private void Start()
     {
-        startpos = transform.position.x;
-        length = GetComponent<SpriteRenderer>().bounds.size.x;
+        var position = cameraObject.transform.position;
+        _startpos = transform.position.x;
+        _length = GetComponent<SpriteRenderer>().bounds.size.x;
     }
 
     // Update is called once per frame
-    void Update()
+    private void Update()
     {
-        float temp = (cameraObject.transform.position.x * (1 - parallaxEffect));
-        float dist = (cameraObject.transform.position.x * parallaxEffect);
+        var position = cameraObject.transform.position;
+        var temp = (position.x * (1 - parallaxEffect));
+        var dist = (position.x * parallaxEffect);
 
-        transform.position = new Vector3(startpos + dist, transform.position.y, transform.position.z);
+        transform.position = new Vector3(_startpos + dist, transform.position.y, transform.position.z);
 
-        if (temp > startpos + length) { 
-            startpos += length; 
+        if (temp > _startpos + _length) { 
+            _startpos += _length; 
         }
-        else if (temp < startpos - length) { 
-            startpos -= length; 
+        else if (temp < _startpos - _length) { 
+            _startpos -= _length; 
         };
-
     }
 }

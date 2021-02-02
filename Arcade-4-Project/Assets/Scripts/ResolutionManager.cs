@@ -1,6 +1,7 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.UI;
 
 public class ResolutionManager : MonoBehaviour
 {
@@ -9,9 +10,11 @@ public class ResolutionManager : MonoBehaviour
         Screen.SetResolution(1280, 720, false, 60);
     }
 
-    public void InputData(int val)
+    public void OnDropDownChanged(Dropdown dropDown)
     {
-        switch (val)
+        Debug.Log("DROP DOWN CHANGED -> " + dropDown.value);
+        
+        switch (dropDown.value)
         {
             case 0:
                 Screen.SetResolution(1280, 720, false, 60);
