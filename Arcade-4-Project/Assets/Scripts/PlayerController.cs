@@ -23,6 +23,7 @@ public class PlayerController : MonoBehaviour
     public int p_health = 100;
     public int p_health_max = 100;
     public int p_health_threshold = 0;
+    
 
     [SerializeField] private int extraJumps;
     [SerializeField] private int extraJumpsValue = 2;
@@ -35,18 +36,20 @@ public class PlayerController : MonoBehaviour
         facingRight = true;
         extraJumps = extraJumpsValue;
         healthBar.SetMaxHealth(p_health);
+        
     }
 
     void FixedUpdate()
     {
         // Checks for player
-        _isGrounded = Physics2D.OverlapCircle(groundCheck.position, checkRadius, checkGroundLayer);
-        _isGameOver = Physics2D.OverlapCircle(groundCheck.position, checkRadius, checkGameOverMask);
+        var position = groundCheck.position;
+        _isGrounded = Physics2D.OverlapCircle(position, checkRadius, checkGroundLayer);
+        _isGameOver = Physics2D.OverlapCircle(position, checkRadius, checkGameOverMask);
         // Movement equals the Horizontal movement of the player (Check input manager for button inputs)
         movement = new Vector3(Input.GetAxis("Horizontal"), 0f, 0f);
         horizontalMoving = Input.GetAxisRaw("Horizontal") * moveSpeed;
         // Adding the results of movement, deltatime and moveSpeed to the Players Position values
-        // This code is independant of framerates due to Time.deltaTime
+        // This code is independent of framerate due to Time.deltaTime
         transform.position += movement * Time.deltaTime * moveSpeed;
         Flip(movement);
     }
