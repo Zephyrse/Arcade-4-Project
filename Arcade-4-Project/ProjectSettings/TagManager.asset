@@ -8,6 +8,7 @@ TagManager:
   - Obstacle
   - Health_Pickup
   - Segway
+  - Text
   layers:
   - Default
   - TransparentFX

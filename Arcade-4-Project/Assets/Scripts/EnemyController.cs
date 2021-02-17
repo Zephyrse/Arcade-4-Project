@@ -1,7 +1,9 @@
-﻿using System.Collections;
+﻿using System;
+using System.Collections;
 using System.Collections.Generic;
 using TMPro;
 using UnityEngine;
+using UnityEngine.UI;
 
 [RequireComponent(typeof(Rigidbody2D), typeof(BoxCollider2D))]
 public class EnemyController : MonoBehaviour
@@ -23,10 +25,15 @@ public class EnemyController : MonoBehaviour
     public float nextFire;
     public float enemyRange;
     public float nextFireTest;
+    private int _scoreValueIncrement = 50;
+    private Score _score;
 
     // Setting enemies max healthbar value to its health as soon as the script starts
     void Start()
     {
+        GameObject scoreText = GameObject.Find("ScoreText");
+        _score = scoreText.GetComponent<Score>();
+        
         fireRate = 2f;
         nextFire = Time.time;
         healthBar.SetMaxHealth(e_health);
@@ -50,7 +57,7 @@ public class EnemyController : MonoBehaviour
     {
         if (nextFireTest >= fireRate && Vector2.Distance(transform.position, target.position) <= enemyRange)
         {
-            if (gameObject.tag != "Segway") {
+            if (!gameObject.CompareTag("Segway")) {
                 Instantiate(bullet, firePoint.position, Quaternion.identity);
                 nextFireTest = 0f;
             }
@@ -98,4 +105,8 @@ public class EnemyController : MonoBehaviour
         }
     }
 
+    public void OnDestroy()
+    {
+        _score._scoreValue += _scoreValueIncrement;
+    }
 }

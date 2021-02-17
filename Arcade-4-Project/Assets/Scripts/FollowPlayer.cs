@@ -42,7 +42,7 @@ public class FollowPlayer : MonoBehaviour
         }
         else
         {
-            smoothFactor = 15;
+            smoothFactor = 10;
         }
     }
 }
