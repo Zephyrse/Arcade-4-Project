@@ -3,6 +3,10 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
 
+/// <summary>
+/// This class is responsible for the constant update of the score counter
+/// </summary>
+
 public class Score : MonoBehaviour
 {
     public Transform player;
@@ -18,7 +22,5 @@ public class Score : MonoBehaviour
     void Update()
     {
         scoreMovement.text = (_scoreValue).ToString("0");
-        //scoreEnemies.text = 0.ToString("0");
-        //scoreText.text = scoreMovement.text.ToInt + scoreEnemies.text.ToInt;
     }
 }
