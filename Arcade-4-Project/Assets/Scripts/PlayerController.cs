@@ -45,8 +45,6 @@ public class PlayerController : MonoBehaviour
         extraJumps = extraJumpsValue;
         healthBar.SetMaxHealth(pHealth);
         Text.enabled = false;
-
-
     }
 
     private void FixedUpdate()
