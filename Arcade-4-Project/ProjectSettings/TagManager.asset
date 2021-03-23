@@ -9,6 +9,7 @@ TagManager:
   - Health_Pickup
   - Segway
   - Text
+  - Boss_Battle_1
   layers:
   - Default
   - TransparentFX

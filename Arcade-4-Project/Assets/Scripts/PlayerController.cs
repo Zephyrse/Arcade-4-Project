@@ -13,16 +13,22 @@ using UnityEngine.Serialization;
 [RequireComponent(typeof(Rigidbody2D), typeof(BoxCollider2D))]
 public class PlayerController : MonoBehaviour
 {
+    private Vector3 velocity = Vector3.zero;
+
     [Header("References")]
     public Animator animator;
     public PlayerHealthBar healthBar;
     public TextMeshProUGUI Text;
+    public GameObject cameraRef;
+    public GameObject destination;
+    public GameObject bossBox1;
+    public GameObject bossBoxTest;
 
     [Header("Variables")]
-    public float    moveSpeed = 3f;
-    public float    jumpForce;
-    public float    checkRadius;
-    public Vector3  movement;
+    public float moveSpeed = 3f;
+    public float jumpForce;
+    public float checkRadius;
+    public Vector3 movement;
     public float horizontalMoving;
     public Transform groundCheck;
     public LayerMask checkGroundLayer;
@@ -31,7 +37,7 @@ public class PlayerController : MonoBehaviour
     [FormerlySerializedAs("p_health")] public int pHealth = 100;
     [FormerlySerializedAs("p_health_max")] public int pHealthMAX = 100;
     [FormerlySerializedAs("p_health_threshold")] public int pHealthThreshold = 0;
-    
+
 
     [SerializeField] private int extraJumps;
     [SerializeField] private int extraJumpsValue = 2;
@@ -39,12 +45,16 @@ public class PlayerController : MonoBehaviour
     private bool _isGrounded;
     private bool _isGameOver;
 
+    private bool _isBossBattle1 = false;
+    private bool _isBossBattle2 = false;
+
     private void Start()
     {
         facingRight = true;
         extraJumps = extraJumpsValue;
         healthBar.SetMaxHealth(pHealth);
         Text.enabled = false;
+
     }
 
     private void FixedUpdate()
@@ -53,23 +63,32 @@ public class PlayerController : MonoBehaviour
         var position = groundCheck.position;
         _isGrounded = Physics2D.OverlapCircle(position, checkRadius, checkGroundLayer);
         _isGameOver = Physics2D.OverlapCircle(position, checkRadius, checkGameOverMask);
-        
+
         // Movement equals the Horizontal movement of the player (Check input manager for button inputs)
         movement = new Vector3(Input.GetAxis("Horizontal"), 0f, 0f);
         horizontalMoving = Input.GetAxisRaw("Horizontal") * moveSpeed;
-        
+
         // Adding the results of movement, deltatime and moveSpeed to the Players Position values
         // This code is independent of framerate due to Time.deltaTime
         transform.position += movement * (Time.deltaTime * moveSpeed);
         Flip(movement);
+
+        if (_isBossBattle1)
+        {
+            bossBox1.SetActive(true);
+            bossBoxTest.SetActive(true);
+            cameraRef.GetComponent<FollowPlayer>().enabled = false;
+            cameraRef.transform.position = Vector3.SmoothDamp(cameraRef.transform.position, destination.transform.position, ref velocity, 3f);
+        }
+
     }
 
     private void Update()
     {
         animator.SetFloat("Speed", Mathf.Abs(horizontalMoving));
-        
-        
-        
+
+
+
         if (_isGrounded == true)
         {
             animator.SetBool("isJumping", false);
@@ -83,6 +102,7 @@ public class PlayerController : MonoBehaviour
         }
 
         Jump();
+
     }
 
     private void OnDrawGizmos()
@@ -145,6 +165,16 @@ public class PlayerController : MonoBehaviour
         }
     }
 
-    
+    public void OnTriggerEnter2D(Collider2D col)
+    {
+        if (col.gameObject.CompareTag("Boss_Battle_1"))
+        {
+            _isBossBattle1 = true;
+        }
+    }
+
+
+
+
 
 }
