@@ -23,6 +23,7 @@ public class PlayerController : MonoBehaviour
     public GameObject destination;
     public GameObject bossBox1;
     public GameObject bossBoxTest;
+    public GameObject Boss;
 
     [Header("Variables")]
     public float moveSpeed = 3f;
@@ -40,7 +41,7 @@ public class PlayerController : MonoBehaviour
 
 
     [SerializeField] private int extraJumps;
-    [SerializeField] private int extraJumpsValue = 2;
+    [SerializeField] private int extraJumpsValue;
     private Vector3 _playerScale;
     private bool _isGrounded;
     private bool _isGameOver;
@@ -76,7 +77,7 @@ public class PlayerController : MonoBehaviour
         if (_isBossBattle1)
         {
             bossBox1.SetActive(true);
-            bossBoxTest.SetActive(true);
+            //bossBoxTest.SetActive(true);
             cameraRef.GetComponent<FollowPlayer>().enabled = false;
             cameraRef.transform.position = Vector3.SmoothDamp(cameraRef.transform.position, destination.transform.position, ref velocity, 3f);
         }
@@ -93,6 +94,10 @@ public class PlayerController : MonoBehaviour
         {
             animator.SetBool("isJumping", false);
             extraJumps = extraJumpsValue;
+        }
+        else
+        {
+            animator.SetBool("isJumping", true);
         }
 
         if (_isGameOver == true)
@@ -114,12 +119,12 @@ public class PlayerController : MonoBehaviour
     // ReSharper disable Unity.PerformanceAnalysis
     private void Jump()
     {
-        if (Input.GetButtonDown("Jump") && extraJumps > 0)
+        if (Input.GetButtonDown("Jump") && _isGrounded == true)
         {
             animator.SetBool("isJumping", true);
             // Adding force on the Y axis if the jump button is pressed
             gameObject.GetComponent<Rigidbody2D>().AddForce(new Vector2(0f, jumpForce), ForceMode2D.Impulse);
-            extraJumps--;
+            //extraJumps--;
         }
     }
 
@@ -170,6 +175,7 @@ public class PlayerController : MonoBehaviour
         if (col.gameObject.CompareTag("Boss_Battle_1"))
         {
             _isBossBattle1 = true;
+            Boss.SetActive(true);
         }
     }
 
