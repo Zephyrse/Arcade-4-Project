@@ -3,7 +3,12 @@ using System.Collections;
 using System.Collections.Generic;
 using TMPro;
 using UnityEngine;
+using UnityEngine.Serialization;
 using UnityEngine.UI;
+
+/// <summary>
+/// The main script that handles all enemies variables and functions
+/// </summary>
 
 [RequireComponent(typeof(Rigidbody2D), typeof(BoxCollider2D))]
 public class EnemyController : MonoBehaviour
@@ -18,9 +23,9 @@ public class EnemyController : MonoBehaviour
     [SerializeField]
     private GameObject bullet = null;
 
-    [Header("Variables")]
-    public int e_health = 100;
-    public int  e_health_threshold = 0;
+    [FormerlySerializedAs("e_health")] [Header("Variables")]
+    public int eHealth = 100;
+    public int  eHealthThreshold = 0;
     public float fireRate;
     public float nextFire;
     public float enemyRange;
@@ -28,20 +33,20 @@ public class EnemyController : MonoBehaviour
     private int _scoreValueIncrement = 50;
     private Score _score;
 
-    // Setting enemies max healthbar value to its health as soon as the script starts
-    void Start()
+    // Setting enemies max health bar value to its health as soon as the script starts
+    private void Start()
     {
-        GameObject scoreText = GameObject.Find("ScoreText");
+        var scoreText = GameObject.Find("ScoreText");
         _score = scoreText.GetComponent<Score>();
         
         fireRate = 2f;
         nextFire = Time.time;
-        healthBar.SetMaxHealth(e_health);
+        healthBar.SetMaxHealth(eHealth);
         shootBar.SetMaxHealth((int)fireRate);
         StartCoroutine(CheckDistanceAndFlip());
     }
 
-    void Update()
+    private void Update()
     {
         if (target != null)
         {
@@ -53,30 +58,27 @@ public class EnemyController : MonoBehaviour
 
     }
 
-    void CheckTimeToFire()
+    private void CheckTimeToFire()
     {
-        if (nextFireTest >= fireRate && Vector2.Distance(transform.position, target.position) <= enemyRange)
-        {
-            if (!gameObject.CompareTag("Segway")) {
+        if (!(nextFireTest >= fireRate) || !(Vector2.Distance(transform.position, target.position) <= enemyRange)) return;
+            if (gameObject.CompareTag("Segway")) return;
                 Instantiate(bullet, firePoint.position, Quaternion.identity);
                 nextFireTest = 0f;
-            }
-        }
     }
 
-    // Enemy takes damage | Updates its health and healthbar value
+    // Enemy takes damage | Updates its health and health bar value
     public void TakeDamage(int damage)
     {
-        e_health -= damage;
-        healthBar.SetHealth(e_health);
+        eHealth -= damage;
+        healthBar.SetHealth(eHealth);
 
-        if (e_health <= e_health_threshold)
+        if (eHealth <= eHealthThreshold)
         {
             Destroy(gameObject);
         }
     }
 
-    public IEnumerator CheckDistanceAndFlip()
+    private IEnumerator CheckDistanceAndFlip()
     {
         while (true && target != null)
         {
@@ -109,4 +111,5 @@ public class EnemyController : MonoBehaviour
     {
         _score._scoreValue += _scoreValueIncrement;
     }
+    
 }

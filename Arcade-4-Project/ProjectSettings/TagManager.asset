@@ -9,6 +9,7 @@ TagManager:
   - Health_Pickup
   - Segway
   - Text
+  - Boss_Battle_1
   layers:
   - Default
   - TransparentFX
@@ -48,4 +49,10 @@ TagManager:
     locked: 0
   - name: Default
     uniqueID: 0
+    locked: 0
+  - name: UI
+    uniqueID: 3586385855
+    locked: 0
+  - name: Player
+    uniqueID: 3057417761
     locked: 0
