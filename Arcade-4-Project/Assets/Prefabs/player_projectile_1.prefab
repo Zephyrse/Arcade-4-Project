@@ -13,8 +13,9 @@ GameObject:
   - component: {fileID: 2657522749738110976}
   - component: {fileID: 5497624738690640584}
   - component: {fileID: 6131115292176218797}
+  - component: {fileID: -6232769011882364751}
   m_Layer: 0
-  m_Name: Projectile1
+  m_Name: player_projectile_1
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -29,7 +30,7 @@ Transform:
   m_GameObject: {fileID: 3495273544993388959}
   m_LocalRotation: {x: -0, y: -0, z: 0.003247531, w: 0.99999475}
   m_LocalPosition: {x: -7.001, y: -1.46, z: 0}
-  m_LocalScale: {x: 0.1, y: 0.1, z: 0.5}
+  m_LocalScale: {x: 0.15901999, y: 0.15901999, z: 0.7951}
   m_Children: []
   m_Father: {fileID: 0}
   m_RootOrder: 0
@@ -73,7 +74,7 @@ SpriteRenderer:
   m_SortingLayerID: 0
   m_SortingLayer: 0
   m_SortingOrder: 0
-  m_Sprite: {fileID: 21300000, guid: 1317798dd10976840aa9e961c27448c9, type: 3}
+  m_Sprite: {fileID: 21300000, guid: 9667c0fe03e70ea4f935927b7ebdf4e3, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_FlipX: 0
   m_FlipY: 0
@@ -97,6 +98,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   rb: {fileID: 5497624738690640584}
+  nBulletSpeed: 40
 --- !u!50 &5497624738690640584
 Rigidbody2D:
   serializedVersion: 4
@@ -131,16 +133,58 @@ BoxCollider2D:
   m_IsTrigger: 1
   m_UsedByEffector: 0
   m_UsedByComposite: 0
-  m_Offset: {x: -0.44029748, y: -1.9117342}
+  m_Offset: {x: 0.03, y: 0.02}
   m_SpriteTilingProperty:
     border: {x: 0, y: 0, z: 0, w: 0}
     pivot: {x: 0.5, y: 0.5}
-    oldSize: {x: 33, y: 25.507326}
+    oldSize: {x: 4.18, y: 0.65}
     newSize: {x: 33, y: 25.507326}
     adaptiveTilingThreshold: 0.5
     drawMode: 0
     adaptiveTiling: 0
   m_AutoTiling: 0
   serializedVersion: 2
-  m_Size: {x: 8.066622, y: 0.379431}
+  m_Size: {x: 4.15, y: 0.29}
   m_EdgeRadius: 0
+--- !u!114 &-6232769011882364751
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3495273544993388959}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 073797afb82c5a1438f328866b10b3f0, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  m_LightType: 3
+  m_BlendStyleIndex: 0
+  m_FalloffIntensity: 0.741
+  m_Color: {r: 0.5271004, g: 0.95930624, b: 0.9716981, a: 1}
+  m_Intensity: 2
+  m_LightVolumeOpacity: 0.325
+  m_ApplyToSortingLayers: 00000000
+  m_LightCookieSprite: {fileID: 21300000, guid: 9667c0fe03e70ea4f935927b7ebdf4e3,
+    type: 3}
+  m_UseNormalMap: 0
+  m_LightOrder: 0
+  m_AlphaBlendOnOverlap: 0
+  m_ShadowIntensity: 0.278
+  m_ShadowVolumeIntensity: 0.324
+  m_PointLightInnerAngle: 360
+  m_PointLightOuterAngle: 360
+  m_PointLightInnerRadius: 0
+  m_PointLightOuterRadius: 1
+  m_PointLightDistance: 3
+  m_PointLightQuality: 1
+  m_ShapeLightParametricSides: 4
+  m_ShapeLightParametricAngleOffset: 0
+  m_ShapeLightParametricRadius: 2
+  m_ShapeLightFalloffSize: 0.5
+  m_ShapeLightFalloffOffset: {x: 0, y: 0}
+  m_ShapePath:
+  - {x: -0.5, y: -0.5, z: 0}
+  - {x: 0.5, y: -0.5, z: 0}
+  - {x: 0.5, y: 0.5, z: 0}
+  - {x: -0.5, y: 0.5, z: 0}
