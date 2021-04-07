@@ -10,6 +10,7 @@ TagManager:
   - Segway
   - Text
   - Boss_Battle_1
+  - End_Level
   layers:
   - Default
   - TransparentFX
