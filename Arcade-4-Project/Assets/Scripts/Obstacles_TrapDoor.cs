@@ -24,7 +24,6 @@ public class Obstacles_TrapDoor : MonoBehaviour
 
         v_Animator.SetTrigger("PlayerStep");
 
-
         yield return new WaitForSeconds(1);
         trapdoor.GetComponent<BoxCollider2D>().enabled = false;
         yield return new WaitForSeconds(1);

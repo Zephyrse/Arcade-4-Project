@@ -18,14 +18,14 @@ public class Player_Controller : MonoBehaviour
 
     [Header("References")]
     public Animator animator;
+    private SpriteRenderer sprite;
     public Player_HealthBar healthBar;
-    public TextMeshProUGUI Text;
+    public GameObject gameOverScreen;
     public GameObject cameraRef;
     public GameObject destination;
     public GameObject bossBox1;
     public GameObject bossBoxTest;
     public GameObject Boss;
-    
 
     [Header("Variables")]
     public float moveSpeed = 3f;
@@ -37,16 +37,19 @@ public class Player_Controller : MonoBehaviour
     public LayerMask checkGroundLayer;
     public LayerMask checkGameOverMask;
     public bool facingRight;
-    [FormerlySerializedAs("p_health")] public int pHealth = 100;
-    [FormerlySerializedAs("p_health_max")] public int pHealthMAX = 100;
-    [FormerlySerializedAs("p_health_threshold")] public int pHealthThreshold = 0;
+    public int pHealth = 100;
+    public int pHealthMAX = 100;
+    public int pHealthThreshold = 0;
 
+    [SerializeField]
+    private float invincibilityDurationSeconds;
 
     [SerializeField] private int extraJumps;
     [SerializeField] private int extraJumpsValue;
     private Vector3 _playerScale;
     private bool _isGrounded;
     private bool _isGameOver;
+    private bool _isInvincible = false;
 
     private bool _isBossBattle1 = false;
     private bool _isBossBattle2 = false;
@@ -57,7 +60,7 @@ public class Player_Controller : MonoBehaviour
         facingRight = true;
         extraJumps = extraJumpsValue;
         healthBar.SetMaxHealth(pHealth);
-        Text.enabled = false;
+        sprite = GetComponent<SpriteRenderer>();
 
     }
 
@@ -98,8 +101,6 @@ public class Player_Controller : MonoBehaviour
     {
         animator.SetFloat("Speed", Mathf.Abs(horizontalMoving));
 
-
-
         if (_isGrounded == true)
         {
             animator.SetBool("isJumping", false);
@@ -113,11 +114,11 @@ public class Player_Controller : MonoBehaviour
         if (_isGameOver == true)
         {
             Destroy(gameObject);
-            Text.enabled = true;
+            //Text.enabled = true;
+            gameOverScreen.SetActive(true);
         }
 
         Jump();
-
     }
 
     private void OnDrawGizmos()
@@ -126,7 +127,6 @@ public class Player_Controller : MonoBehaviour
         Gizmos.DrawWireSphere(groundCheck.position, checkRadius);
     }
     
-    // ReSharper disable Unity.PerformanceAnalysis
     private void Jump()
     {
         if (Input.GetButtonDown("Jump") && _isGrounded == true)
@@ -140,11 +140,19 @@ public class Player_Controller : MonoBehaviour
 
     public void TakeDamage(int damage)
     {
-        pHealth -= damage;
-        healthBar.SetHealth(pHealth);
+        if (!_isInvincible)
+        {
+            pHealth -= damage;
+            healthBar.SetHealth(pHealth);
+
+            StartCoroutine(InvincibilityFrames());
+        }
+        else if (_isInvincible) return;
 
         if (pHealth <= pHealthThreshold)
         {
+            gameOverScreen.SetActive(true);
+            
             Destroy(gameObject);
         }
     }
@@ -193,8 +201,19 @@ public class Player_Controller : MonoBehaviour
         }
     }
 
+    private IEnumerator InvincibilityFrames()
+    {
+        Debug.Log("Player turned invincible!");
+        sprite.color = new Color(0.6f, 0.5f, 0.4f, 0.7f);
+        _isInvincible = true;
 
+        yield return new WaitForSeconds(invincibilityDurationSeconds);
 
+        _isInvincible = false;
+        sprite.color = new Color(1, 1, 1, 1);
+        Debug.Log("Player is no longer invincible!");
+
+    }
 
 
 }

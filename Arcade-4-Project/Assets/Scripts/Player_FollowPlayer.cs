@@ -7,10 +7,16 @@ public class Player_FollowPlayer : MonoBehaviour
     public Transform playerTarget;
     public Vector3 cameraOffset;
     public Rigidbody2D playerRb;
+    private Animator anim;
 
     // Can only set the Smooth factor between a certain range
     [Range(1,30)] 
     public float smoothFactor;
+
+    private void Start()
+    {
+        anim = gameObject.GetComponent<Animator>();
+    }
 
     private void FixedUpdate()
     {
@@ -20,6 +26,11 @@ public class Player_FollowPlayer : MonoBehaviour
             SmoothFollow();
             CheckPlayerVelocity();
         }
+        else if (!playerRb)
+        {
+            anim.Play("Camera_Anim");
+        }
+
     }
 
     void SmoothFollow()
@@ -45,4 +56,10 @@ public class Player_FollowPlayer : MonoBehaviour
             smoothFactor = 10;
         }
     }
+
+    
+
+
+
+
 }
