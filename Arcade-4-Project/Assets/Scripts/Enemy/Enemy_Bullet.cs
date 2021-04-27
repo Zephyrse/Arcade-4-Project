@@ -9,6 +9,7 @@ public class Enemy_Bullet : MonoBehaviour
     public float nBulletSpeed;
     public Vector2 velocity;
     Player_Controller target;
+    Enemy_Controller enemy;
     
     Vector2 moveDirection;
 
@@ -16,9 +17,14 @@ public class Enemy_Bullet : MonoBehaviour
     void Start()
     {
         target = GameObject.FindObjectOfType<Player_Controller>();
+        enemy = GameObject.FindObjectOfType<Enemy_Controller>();
         moveDirection = (target.transform.position - transform.position).normalized;
         Debug.Log(moveDirection);
+
         rb.velocity = new Vector2(velocity.x, velocity.y);
+
+        Debug.Log(enemy.transform.localScale.x);
+
 
         //Debug.DrawRay(transform.position, moveDirection, Color.green, 1);
         Destroy(gameObject, (float)1.5);

@@ -4,6 +4,7 @@ using UnityEngine;
 
 public class Player_FollowPlayer : MonoBehaviour
 {
+    [Header("References")]
     public Transform playerTarget;
     public Vector3 cameraOffset;
     public Rigidbody2D playerRb;

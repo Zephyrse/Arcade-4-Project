@@ -15,12 +15,14 @@ public class Player_HealthBar : MonoBehaviour
 
     public void Update()
     {
+        // Check if target exists
         if (target == null)
         {
             Destroy(gameObject);
         }
     }
 
+    // Functions underneath usable in other scripts for setting health
     public void SetMaxHealth(int health)
     {
         slider.maxValue = health;
