@@ -3275,7 +3275,6 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   animator: {fileID: 0}
   healthBar: {fileID: 2039137815}
-  shootBar: {fileID: 1256963016}
   firePoint: {fileID: 0}
   target: {fileID: 985793204}
   bullet: {fileID: 7363278991456279574, guid: deab6c1b2d915c04090a8cccf3caf196, type: 3}
@@ -19515,7 +19514,6 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   animator: {fileID: 0}
   healthBar: {fileID: 1782726550}
-  shootBar: {fileID: 1042385381}
   firePoint: {fileID: 1681662660}
   target: {fileID: 985793204}
   bullet: {fileID: 7363278991456279574, guid: deab6c1b2d915c04090a8cccf3caf196, type: 3}
