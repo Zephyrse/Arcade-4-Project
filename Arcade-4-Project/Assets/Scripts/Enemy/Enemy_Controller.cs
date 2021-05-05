@@ -16,7 +16,6 @@ public class Enemy_Controller : MonoBehaviour
     [Header("References")]
     public Animator animator;
     public Enemy_HealthBar healthBar;
-    public Enemy_HealthBar shootBar;
     public Transform firePoint;
     public Transform target = null;
 
@@ -43,7 +42,7 @@ public class Enemy_Controller : MonoBehaviour
         fireRate = 2f;
         nextFire = Time.time;
         healthBar.SetMaxHealth(eHealth);
-        shootBar.SetMaxHealth((int)fireRate);
+        //shootBar.SetMaxHealth((int)fireRate);
         StartCoroutine(FlipTestF());
     }
 
@@ -56,7 +55,7 @@ public class Enemy_Controller : MonoBehaviour
         }
 
         nextFireTest += Time.deltaTime;
-        shootBar.SetHealthFloat(nextFireTest);
+        //shootBar.SetHealthFloat(nextFireTest);
     }
 
     private void CheckTimeToFire()
@@ -91,7 +90,13 @@ public class Enemy_Controller : MonoBehaviour
             switch (Vector2.Dot(toTarget, transform.right) > 0)
             {
                 case true:
-                    Instantiate(bullet, firePoint.position, Quaternion.identity);
+
+                    if ((Vector2.Distance(transform.position, target.position) <= enemyRange))
+                    {
+                        Instantiate(bullet, firePoint.position, Quaternion.identity);
+                    }
+
+                    
                     if (isTurned == true)
                     {
                         animator.Play("Base Layer.Floating_Enim_Turn", 0, 0);
@@ -110,7 +115,12 @@ public class Enemy_Controller : MonoBehaviour
                     break;
 
                 case false:
-                    Instantiate(rev_bullet, firePoint.position, Quaternion.identity);
+
+                    if ((Vector2.Distance(transform.position, target.position) <= enemyRange))
+                    {
+                        Instantiate(rev_bullet, firePoint.position, Quaternion.identity);
+                    }
+
                     if (isTurned == false)
                     {
                         animator.Play("Base Layer.Floating_Enim_Turn", 0, 0.25f);
@@ -128,7 +138,7 @@ public class Enemy_Controller : MonoBehaviour
                     break;
             }
 
-            yield return new WaitForSeconds(1.0f);
+            yield return new WaitForSeconds(1.3f);
         }
     }
 

@@ -61,7 +61,6 @@ public class Player_Controller : MonoBehaviour
         extraJumps = extraJumpsValue;
         healthBar.SetMaxHealth(pHealth);
         sprite = GetComponent<SpriteRenderer>();
-
     }
 
     private void FixedUpdate()
@@ -214,6 +213,4 @@ public class Player_Controller : MonoBehaviour
         Debug.Log("Player is no longer invincible!");
 
     }
-
-
 }
