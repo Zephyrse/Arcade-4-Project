@@ -2,9 +2,15 @@
 using System.Collections.Generic;
 using UnityEngine;
 
+/// <summary>
+/// The main script for the players weapon.
+/// Functions and variables that determine the speed, direction, shooting; they are all contained in this script
+/// </summary>
+
 public class Player_Weapon : MonoBehaviour
 {
     [Header("References")]
+    public Animator animator;
     public Transform firePoint;
     public GameObject bulletPrefab;
     public Transform playerT;
@@ -41,7 +47,6 @@ public class Player_Weapon : MonoBehaviour
             }
             // Spawns an instance of the Bullet Prefab and grabs a reference to its Rigidbody for later use
             Rigidbody2D bulletRb = Instantiate(bulletPrefab, firePoint.position, firePoint.rotation).GetComponent<Rigidbody2D>();
-            //bulletRb.AddRelativeForce(new Vector2(bulletSpeed, 0.0f), ForceMode2D.Impulse);
             nextFire = Time.time + fireRate;
         }
     }

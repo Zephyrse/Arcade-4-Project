@@ -27,7 +27,7 @@ public class Enemy_Bullet : MonoBehaviour
 
 
         //Debug.DrawRay(transform.position, moveDirection, Color.green, 1);
-        Destroy(gameObject, (float)1.5);
+        Destroy(gameObject, (float)2.5);
     }
 
     void OnTriggerEnter2D(Collider2D col)

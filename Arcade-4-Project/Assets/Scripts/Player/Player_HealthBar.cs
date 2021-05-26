@@ -3,6 +3,10 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
 
+/// <summary>
+/// This script handles the Player's healthbar and its functions
+/// </summary>
+
 public class Player_HealthBar : MonoBehaviour
 {
     public Slider slider;

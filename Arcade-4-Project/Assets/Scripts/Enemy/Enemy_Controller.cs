@@ -18,6 +18,7 @@ public class Enemy_Controller : MonoBehaviour
     public Enemy_HealthBar healthBar;
     public Transform firePoint;
     public Transform target = null;
+    public GameObject gameOverScreen;
 
     [SerializeField] private GameObject bullet = null;
     [SerializeField] private GameObject rev_bullet = null;
@@ -30,7 +31,7 @@ public class Enemy_Controller : MonoBehaviour
     public float enemyRange;
     public float nextFireTest;
     private bool isTurned;
-    private int _scoreValueIncrement = 50;
+    private int _scoreValueIncrement = 150;
     private Scene_Score _score;
 
     // Setting enemies max health bar value to its health as soon as the script starts
@@ -52,6 +53,10 @@ public class Enemy_Controller : MonoBehaviour
         {
             CheckTimeToFire();
 
+        }
+        else if (target == null)
+        {
+            //gameOverScreen.SetActive(true);
         }
 
         nextFireTest += Time.deltaTime;
@@ -144,6 +149,9 @@ public class Enemy_Controller : MonoBehaviour
 
     public void OnDestroy()
     {
-        _score._scoreValue += _scoreValueIncrement;
+        if (target != null)
+        {
+            Scene_Score._scoreValue += _scoreValueIncrement;
+        }
     }
 }

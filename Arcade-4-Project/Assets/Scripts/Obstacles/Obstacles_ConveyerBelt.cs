@@ -2,6 +2,10 @@
 using System.Collections.Generic;
 using UnityEngine;
 
+/// <summary>
+/// A simple script that allows for a conveyerbelt type platform to work
+/// </summary>
+
 public class TestScript : MonoBehaviour
 {
     public float speed;

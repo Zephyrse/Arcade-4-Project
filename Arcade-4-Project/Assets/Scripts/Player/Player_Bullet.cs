@@ -2,6 +2,10 @@
 using System.Collections.Generic;
 using UnityEngine;
 
+/// <summary>
+/// A simple script that manages the bullet spawn for the player
+/// </summary>
+
 public class Player_Bullet : MonoBehaviour
 {
     [Header("References")]

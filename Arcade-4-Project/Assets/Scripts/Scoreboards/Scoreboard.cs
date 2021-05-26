@@ -10,13 +10,15 @@ namespace CyberChase.Scoreboards
         [SerializeField] private GameObject scoreboardEntryObject = null;
 
         [Header("Test")]
-        [SerializeField] private string testEntryName = "New Name";
-        [SerializeField] private int testEntryScore = 0;
+        private string testEntryName = Misc_ReadString.nInput;
+        private int testEntryScore = Scene_Score._scoreValue;
 
         private string SavePath => $"{Application.persistentDataPath}/highscores.json";
 
         private void Start()
         {
+            Debug.Log(Scene_Score._scoreValue);
+
             ScoreboardSaveData savedScores = GetSavedScores();
 
             UpdateUI(savedScores);

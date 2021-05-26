@@ -1,10 +1,12 @@
-﻿using System;
+﻿using CyberChase.Scoreboards;
+using System;
 using System.Collections;
 using System.Collections.Generic;
 using TMPro;
 using UnityEngine;
 using UnityEngine.SceneManagement;
 using UnityEngine.Serialization;
+using UnityEngine.UI;
 
 /// <summary>
 /// The main script that handles all of the players variables and functions.
@@ -26,6 +28,7 @@ public class Player_Controller : MonoBehaviour
     public GameObject bossBox1;
     public GameObject bossBoxTest;
     public GameObject Boss;
+    public GameObject bossHealth;
 
     [Header("Variables")]
     public float moveSpeed = 3f;
@@ -54,6 +57,13 @@ public class Player_Controller : MonoBehaviour
     private bool _isBossBattle1 = false;
     private bool _isBossBattle2 = false;
     public bool _endLevel      = false;
+
+    private Scoreboard scoreboard;
+
+    [SerializeField] Text countdownText;
+
+    public float timer;
+    public int timerInt;
 
     private void Start()
     {
@@ -94,10 +104,21 @@ public class Player_Controller : MonoBehaviour
             SceneManager.LoadScene(0);
             
         }
+
+        if (Boss == null)
+        {
+            Scene_Score._scoreValue += timerInt;
+            _endLevel = true;
+        }
+
     }
 
     private void Update()
     {
+        timer -= Time.deltaTime;
+        timerInt = (int)timer;
+        countdownText.text = timerInt.ToString("0");
+
         animator.SetFloat("Speed", Mathf.Abs(horizontalMoving));
 
         if (_isGrounded == true)
@@ -113,10 +134,10 @@ public class Player_Controller : MonoBehaviour
         if (_isGameOver == true)
         {
             Destroy(gameObject);
+            //scoreboard.AddEntry();
             //Text.enabled = true;
-            gameOverScreen.SetActive(true);
+            //gameOverScreen.SetActive(true);
         }
-
         Jump();
     }
 
@@ -151,7 +172,6 @@ public class Player_Controller : MonoBehaviour
         if (pHealth <= pHealthThreshold)
         {
             gameOverScreen.SetActive(true);
-            
             Destroy(gameObject);
         }
     }
@@ -192,13 +212,27 @@ public class Player_Controller : MonoBehaviour
         if (col.gameObject.CompareTag("Boss_Battle_1"))
         {
             _isBossBattle1 = true;
-            Boss.SetActive(true);
+            //Boss.SetActive(true);
+            bossHealth.SetActive(true);
         }
         else if (col.gameObject.CompareTag("End_Level"))
         {
             _endLevel = true;
         }
     }
+
+    public void OnDestroy()
+    {
+        gameOverScreen.SetActive(true);
+
+    }
+
+    public void BossDestroyed()
+    {
+
+    }
+
+
 
     private IEnumerator InvincibilityFrames()
     {

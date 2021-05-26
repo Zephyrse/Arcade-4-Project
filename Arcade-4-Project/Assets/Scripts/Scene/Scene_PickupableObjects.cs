@@ -2,6 +2,10 @@
 using System.Collections.Generic;
 using UnityEngine;
 
+/// <summary>
+/// A simple script that allows for the player to "pickup" objects such as health packs.
+/// </summary>
+
 public class Scene_PickupableObjects : MonoBehaviour
 {
     [Header("References")]

@@ -3,12 +3,19 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.SceneManagement;
 
+/// <summary>
+/// An important script that manages the loading of levels as well as some other functions
+/// Loading levels in this script will be Asyncronous.
+/// </summary>
+
 public class Scene_GameManager : MonoBehaviour
 {
     [Header("References")] 
     private static Scene_GameManager _instance;
     public GameObject loadingScreen;
     public GameObject menus;
+    public GameObject nameEnter;
+    private bool firstTime = true;
 
     private readonly List<GameObject> _lMenus = new List<GameObject>();
     private readonly List<AsyncOperation> _lScenes = new List<AsyncOperation>();
@@ -19,6 +26,7 @@ public class Scene_GameManager : MonoBehaviour
         _instance = this;
         _lMenus.Add(menus);
         SceneManager.LoadSceneAsync((int)Misc_SceneIndex.TITLE_SCREEN, LoadSceneMode.Additive);
+        CheckNameEntered();
         
     }
 
@@ -34,6 +42,21 @@ public class Scene_GameManager : MonoBehaviour
         
     }
 
+    public void CheckNameEntered()
+    {
+        if (firstTime == true)
+        {
+            nameEnter.SetActive(true);
+            firstTime = false;
+        }
+
+        if (Misc_ReadString.nInput != null)
+        {
+            nameEnter.SetActive(false);
+            menus.SetActive(true);
+        }
+    }
+
     public void LoadGame()
     {
         loadingScreen.gameObject.SetActive(true);
@@ -47,6 +70,11 @@ public class Scene_GameManager : MonoBehaviour
 
         Destroy(menus);
         StartCoroutine(SceneLoadingProgress());
+    }
+
+    public void LoadScoreboard()
+    {
+        SceneManager.LoadScene(3);
     }
 
     public void EndLevel()
@@ -77,4 +105,15 @@ public class Scene_GameManager : MonoBehaviour
 
         loadingScreen.gameObject.SetActive(false);
     }
+
+    public void TestFunc()
+    {
+
+    }
+
+
+
+
+
+
 }

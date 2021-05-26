@@ -3,6 +3,10 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
 
+/// <summary>
+/// This script handles the enemy healthbar's functions 
+/// </summary>
+
 public class Enemy_HealthBar : MonoBehaviour
 {
     public Slider slider;

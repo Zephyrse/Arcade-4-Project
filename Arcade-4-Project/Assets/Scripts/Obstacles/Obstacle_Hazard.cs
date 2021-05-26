@@ -2,6 +2,10 @@
 using System.Collections.Generic;
 using UnityEngine;
 
+/// <summary>
+/// A simple script that manages the hazards of the game
+/// </summary>
+
 public class Obstacle_Hazard : MonoBehaviour
 {
     // Start is called before the first frame update

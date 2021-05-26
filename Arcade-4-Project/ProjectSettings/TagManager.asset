@@ -11,6 +11,7 @@ TagManager:
   - Text
   - Boss_Battle_1
   - End_Level
+  - Boss
   layers:
   - Default
   - TransparentFX

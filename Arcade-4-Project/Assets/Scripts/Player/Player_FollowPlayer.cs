@@ -1,6 +1,7 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.UI;
 
 public class Player_FollowPlayer : MonoBehaviour
 {
@@ -10,6 +11,13 @@ public class Player_FollowPlayer : MonoBehaviour
     public Rigidbody2D playerRb;
     private Animator anim;
 
+
+
+    /// <summary>
+    /// This script handles the functions for the camera following the player
+    /// Speficically this script is for smoothed following instead of just making the camera equal the players position
+    /// </summary>
+
     // Can only set the Smooth factor between a certain range
     [Range(1,30)] 
     public float smoothFactor;
@@ -17,6 +25,11 @@ public class Player_FollowPlayer : MonoBehaviour
     private void Start()
     {
         anim = gameObject.GetComponent<Animator>();
+    }
+
+    private void Update()
+    {
+
     }
 
     private void FixedUpdate()

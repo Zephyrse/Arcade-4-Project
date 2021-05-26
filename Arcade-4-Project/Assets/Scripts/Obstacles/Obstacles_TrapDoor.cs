@@ -2,6 +2,10 @@
 using System.Collections.Generic;
 using UnityEngine;
 
+/// <summary>
+/// A simple script that allows for a trapdoor to work as planned in the game.
+/// </summary>
+
 public class Obstacles_TrapDoor : MonoBehaviour
 {
     [SerializeField] private GameObject trapdoor;
@@ -34,7 +38,6 @@ public class Obstacles_TrapDoor : MonoBehaviour
         Debug.Log("Finished Coroutine at timestamp : " + Time.time);
         StopCoroutine(TestFunction());
     }
-
 }
 
 // ---Notes---
